@@ -191,7 +191,7 @@ class SelectableGroup extends Component {
 
   registerSelectable = selectableItem => {
     this.registry.add(selectableItem)
-    if (selectableItem.props.selected) {
+    if (selectableItem.state.selected) {
       this.selectedItems.add(selectableItem)
     }
   }
