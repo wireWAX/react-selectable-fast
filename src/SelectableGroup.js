@@ -4,6 +4,7 @@ import isNodeInRoot from './nodeInRoot'
 import getBoundsForNode, { getDocumentScroll } from './getBoundsForNode'
 import doObjectsCollide from './doObjectsCollide'
 import Selectbox from './Selectbox'
+import SelectableGroupContext from './Context'
 
 const noop = () => {}
 
@@ -79,10 +80,6 @@ class SelectableGroup extends Component {
     delta: 1,
   }
 
-  static childContextTypes = {
-    selectable: object,
-  }
-
   constructor(props) {
     super(props)
     this.state = { selectionMode: false }
@@ -100,18 +97,6 @@ class SelectableGroup extends Component {
       '.selectable-select-all',
       '.selectable-deselect-all',
     ])
-  }
-
-  getChildContext() {
-    return {
-      selectable: {
-        register: this.registerSelectable,
-        unregister: this.unregisterSelectable,
-        selectAll: this.selectAll,
-        clearSelection: this.clearSelection,
-        getScrolledContainer: () => this.scrollContainer,
-      },
-    }
   }
 
   componentDidMount() {
@@ -563,22 +548,38 @@ class SelectableGroup extends Component {
   getGroupRef = c => (this.selectableGroup = c)
   getSelectboxRef = c => (this.selectbox = c)
 
+  defaultContainerStyle = {
+    position: 'relative',
+  }
+
+  contextValue = {
+    selectable: {
+      register: this.registerSelectable,
+      unregister: this.unregisterSelectable,
+      selectAll: this.selectAll,
+      clearSelection: this.clearSelection,
+      getScrolledContainer: () => this.scrollContainer,
+    },
+  }
+
   render() {
     return (
-      <this.props.component
-        ref={this.getGroupRef}
-        style={this.props.style}
-        className={`${this.props.className} ${
-          this.state.selectionMode ? this.props.selectionModeClass : ''
-        }`}
-      >
-        <Selectbox
-          ref={this.getSelectboxRef}
-          fixedPosition={this.props.fixedPosition}
-          className={this.props.selectboxClassName}
-        />
-        {this.props.children}
-      </this.props.component>
+      <SelectableGroupContext.Provider value={this.contextValue}>
+        <this.props.component
+          ref={this.getGroupRef}
+          style={Object.assign(this.defaultContainerStyle, this.props.style)}
+          className={`${this.props.className} ${
+            this.state.selectionMode ? this.props.selectionModeClass : ''
+          }`}
+        >
+          <Selectbox
+            ref={this.getSelectboxRef}
+            fixedPosition={this.props.fixedPosition}
+            className={this.props.selectboxClassName}
+          />
+          {this.props.children}
+        </this.props.component>
+      </SelectableGroupContext.Provider>
     )
   }
 }

@@ -1,7 +1,11 @@
 import React, { Component } from 'react'
 import { object, node } from 'prop-types'
 
+import SelectableGroupContext from './Context'
+
 class DeselectAllButton extends Component {
+  static contextType = SelectableGroupContext
+
   static propTypes = {
     children: object,
     component: node,
@@ -9,10 +13,6 @@ class DeselectAllButton extends Component {
 
   static defaultProps = {
     component: 'div',
-  }
-
-  static contextTypes = {
-    selectable: object,
   }
 
   componentDidMount() {

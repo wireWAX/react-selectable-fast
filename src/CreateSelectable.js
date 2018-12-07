@@ -1,19 +1,19 @@
 import React, { Component } from 'react'
-import { object, bool } from 'prop-types'
+import { bool } from 'prop-types'
+
 import getBoundsForNode from './getBoundsForNode'
+import SelectableGroupContext from './Context'
 
 const createSelectable = WrappedComponent =>
   class SelectableItem extends Component {
+    static contextType = SelectableGroupContext
+
     static propTypes = {
       selected: bool,
     }
 
     static defaultProps = {
       selected: false,
-    }
-
-    static contextTypes = {
-      selectable: object,
     }
 
     state = {
