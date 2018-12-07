@@ -371,8 +371,24 @@ class SelectableGroup extends Component {
     this.ignoreListNodes = [...document.querySelectorAll(this.ignoreList.join(', '))]
   }
 
+  detectLeftButton(event) {
+    if (event.metaKey || event.ctrlKey || event.altKey || event.shiftKey) {
+      return false
+    }
+
+    if ('buttons' in event) {
+      return event.buttons === 1
+    }
+
+    if ('which' in event) {
+      return event.which === 1
+    }
+
+    return event.button === 1
+  }
+
   mouseDown = e => {
-    if (this.mouseDownStarted || this.props.disabled) return
+    if (this.mouseDownStarted || this.props.disabled || !this.detectLeftButton(e)) return
 
     this.updateWhiteListNodes()
     if (this.inIgnoreList(e.target)) {
