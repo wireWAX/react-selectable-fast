@@ -18,8 +18,7 @@
     "prepublish": "npm run lint && npm run clean && npm run build:prod && npm run transpile",
     "prettier": "npx prettier --write src/**/*.js example/**/*.js *.js",
     "lint": "npx eslint --fix --ext js .",
-    "format": "npm run prettier && npm run lint",
-    "precommit": "lint-staged"
+    "format": "npm run prettier && npm run lint"
   },
   "lint-staged": {
     "*.js": [
@@ -82,5 +81,10 @@
     "webpack-bundle-analyzer": "^3.0.3",
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.9"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   }
 }
