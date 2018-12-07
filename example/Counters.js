@@ -27,9 +27,13 @@ class Counters extends Component {
 
     return (
       <p>
-        Selecting: <span className="counter">{selectingItems.length}</span>
+        Selecting:
+{' '}
+<span className="counter">{selectingItems.length}</span>
         <br />
-        Selected: <span className="counter">{selectedItems.length}</span>
+        Selected:
+{' '}
+<span className="counter">{selectedItems.length}</span>
         <br />
         <br />
       </p>

@@ -40,8 +40,12 @@ class App extends Component {
     return (
       <div>
         <Counters ref={this.countersRef} />
-        <button onClick={this.toggleFirstRow}>Toggle first row</button>
-        <button onClick={this.toggleOrder}>Toggle order</button>
+        <button type="button" onClick={this.toggleFirstRow}>
+          Toggle first row
+        </button>
+        <button type="button" onClick={this.toggleOrder}>
+          Toggle order
+        </button>
         <SelectableGroup
           ref={ref => (window.selectableGroup = ref)}
           className="main"

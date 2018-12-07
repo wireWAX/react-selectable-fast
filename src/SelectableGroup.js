@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
-import { number, bool, array, string, func, node, object } from 'prop-types'
+import {
+  number, bool, array, string, func, node, object,
+} from 'prop-types'
 import isNodeInRoot from './nodeInRoot'
 import getBoundsForNode, { getDocumentScroll } from './getBoundsForNode'
 import doObjectsCollide from './doObjectsCollide'
@@ -491,14 +493,14 @@ class SelectableGroup extends Component {
   }
 
   handleClick(e, top, left) {
-    const isMouseUpOnClickElement =
-      [...(e.target.classList || [])].indexOf(this.props.clickClassName) > -1
+    const classNames = e.target.classList || []
+    const isMouseUpOnClickElement = [...classNames].indexOf(this.props.clickClassName) > -1
 
     if (
-      this.props.allowClickWithoutSelected ||
-      this.selectedItems.size ||
-      isMouseUpOnClickElement ||
-      this.ctrlPressed
+      this.props.allowClickWithoutSelected
+      || this.selectedItems.size
+      || isMouseUpOnClickElement
+      || this.ctrlPressed
     ) {
       this.selectItems(
         {
@@ -562,6 +564,7 @@ class SelectableGroup extends Component {
   }
 
   getGroupRef = c => (this.selectableGroup = c)
+
   getSelectboxRef = c => (this.selectbox = c)
 
   defaultContainerStyle = {

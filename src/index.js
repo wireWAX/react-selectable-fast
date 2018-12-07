@@ -7,11 +7,11 @@ import DeselectAll from './DeselectAll'
 // Relay Runtime relies upon, and produce a clear message if they do not exist.
 if (process.env.NODE_ENV === 'development') {
   if (
-    typeof Map !== 'function' ||
-    typeof Set !== 'function' ||
-    typeof Array.from !== 'function' ||
-    typeof Array.isArray !== 'function' ||
-    typeof Object.assign !== 'function'
+    typeof Map !== 'function'
+    || typeof Set !== 'function'
+    || typeof Array.from !== 'function'
+    || typeof Array.isArray !== 'function'
+    || typeof Object.assign !== 'function'
   ) {
     throw new Error(`
       React-Selectable-Fast requires Map, Set, Array.from,
@@ -21,4 +21,6 @@ if (process.env.NODE_ENV === 'development') {
   }
 }
 
-export { SelectableGroup, createSelectable, SelectAll, DeselectAll }
+export {
+  SelectableGroup, createSelectable, SelectAll, DeselectAll,
+}

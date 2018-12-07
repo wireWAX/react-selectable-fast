@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { object, node } from 'prop-types'
+import { node } from 'prop-types'
 
 import SelectableGroupContext from './Context'
 
@@ -7,7 +7,7 @@ class DeselectAllButton extends Component {
   static contextType = SelectableGroupContext
 
   static propTypes = {
-    children: object,
+    children: node,
     component: node,
   }
 
@@ -22,13 +22,16 @@ class DeselectAllButton extends Component {
   getRootRef = c => (this.root = c)
 
   render() {
+    const { children, className, ...rest } = this.props
+
     return (
       <this.props.component
         ref={this.getRootRef}
+        className={`selectable-deselect-all ${className}`}
         onClick={this.context.selectable.clearSelection}
-        className={`selectable-deselect-all ${this.props.className}`}
+        {...rest}
       >
-        {this.props.children}
+        {children}
       </this.props.component>
     )
   }

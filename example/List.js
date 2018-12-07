@@ -12,11 +12,11 @@ class List extends Component {
       <div>
         <p className="not-selectable">Press ESC to clear selection</p>
         <div>
-          <SelectAll className="selectable-button">
-            <button>Select all</button>
+          <SelectAll component="button" type="button" className="selectable-button">
+            Select all
           </SelectAll>
-          <DeselectAll className="selectable-button">
-            <button>Clear selection</button>
+          <DeselectAll component="button" type="button" className="selectable-button">
+            Clear selection
           </DeselectAll>
         </div>
         <div className="albums">

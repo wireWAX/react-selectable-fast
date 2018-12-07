@@ -4,8 +4,7 @@ import { bool } from 'prop-types'
 import getBoundsForNode from './getBoundsForNode'
 import SelectableGroupContext from './Context'
 
-const createSelectable = WrappedComponent =>
-  class SelectableItem extends Component {
+const createSelectable = WrappedComponent => class SelectableItem extends Component {
     static contextType = SelectableGroupContext
 
     static propTypes = {
@@ -46,6 +45,6 @@ const createSelectable = WrappedComponent =>
         />
       )
     }
-  }
+}
 
 export default createSelectable
