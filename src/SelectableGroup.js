@@ -586,7 +586,7 @@ class SelectableGroup extends Component {
       <SelectableGroupContext.Provider value={this.contextValue}>
         <this.props.component
           ref={this.getGroupRef}
-          style={Object.assign(this.defaultContainerStyle, this.props.style)}
+          style={Object.assign({}, this.defaultContainerStyle, this.props.style)}
           className={`${this.props.className} ${
             this.state.selectionMode ? this.props.selectionModeClass : ''
           }`}
