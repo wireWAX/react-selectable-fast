@@ -271,7 +271,6 @@ a:hover {
 .albums {
   display: flex;
   justify-content: space-between;
-  flex-wrap: wrap;
 }
 .album-label {
   display: block;
