@@ -50,7 +50,7 @@ class App extends Component {
           ref={ref => (window.selectableGroup = ref)}
           className="main"
           clickClassName="tick"
-          enableDeselectł
+          enableDeselect
           tolerance={0}
           deselectOnEsc={false}
           allowClickWithoutSelected={false}
