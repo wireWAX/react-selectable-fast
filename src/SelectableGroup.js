@@ -213,7 +213,7 @@ class SelectableGroup extends Component {
     this.mouseMoveStarted = true
     this.mouseMoved = true
 
-    const { scrollTop } = this.scrollContainer
+    const { scrollTop, scrollLeft } = this.scrollContainer
     const eventTop = e.pageY
     const eventLeft = e.pageX
     const { documentScrollTop, documentScrollLeft } = getDocumentScroll()
@@ -231,18 +231,23 @@ class SelectableGroup extends Component {
     const boxHeight = boxTop - top
     boxTop = Math.min(boxTop - boxHeight, boxTop)
 
-    const bowWidth = this.mouseDownData.boxLeft - eventLeft
-    const leftContainerRelative = this.mouseDownData.boxLeft - this.scrollBounds.left
-
-    const boxLeft = this.applyContainerScroll(
-      Math.min(leftContainerRelative - bowWidth, leftContainerRelative),
-      -documentScrollLeft
+    const left = this.applyContainerScroll(
+      eventLeft - this.scrollBounds.left,
+      scrollLeft - documentScrollLeft
     )
+
+    let boxLeft = this.applyContainerScroll(
+      this.mouseDownData.boxLeft - this.scrollBounds.left,
+      this.mouseDownData.scrollLeft - documentScrollLeft
+    )
+
+    const boxWidth = boxLeft - left
+    boxLeft = Math.min(boxLeft - boxWidth, boxLeft)
 
     this.selectbox.setState(
       {
         isBoxSelecting: true,
-        boxWidth: Math.abs(bowWidth),
+        boxWidth: Math.abs(boxWidth),
         boxHeight: Math.abs(boxHeight),
         boxLeft,
         boxTop,
