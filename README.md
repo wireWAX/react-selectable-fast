@@ -4,7 +4,7 @@ Enable a React component (or group of components) to be selectable via mouse/tou
 
 ## Demo
 
-http://valerybugakov.github.io/react-selectable-fast
+https://react-selectable-fast.now.sh
 
 ## Install
 
