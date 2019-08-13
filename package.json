@@ -29,8 +29,16 @@
       "git add"
     ]
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
   "bugs": {
     "url": "https://github.com/valerybugakov/react-selectable-fast/issues"
+  },
+  "engines": {
+    "node": ">8.0.0"
   },
   "keywords": [
     "selectable",
@@ -43,7 +51,10 @@
     "touch",
     "react"
   ],
-  "author": "Valery Bugakov <skymk1@gmail.com>",
+  "author": "Valery Bugakov <skymk1@gmail.com> (https://github.com/valerybugakov/)",
+  "contributors": [
+    "Valery Bugakov <skymk1@gmail.com> (https://github.com/valerybugakov/)"
+  ],
   "license": "MIT",
   "files": [
     "lib",
@@ -66,16 +77,9 @@
     "@babel/preset-typescript": "^7.3.3",
     "@types/react": "^16.9.1",
     "@types/react-dom": "^16.8.5",
-    "babel-eslint": "^10.0.2",
     "babel-loader": "^8.0.6",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "cross-env": "^5.2.0",
-    "eslint": "^6.0.1",
-    "eslint-config-airbnb": "^17.1.1",
-    "eslint-plugin-babel": "^5.1.0",
-    "eslint-plugin-import": "^2.18.0",
-    "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-react": "^7.14.2",
     "husky": "^3.0.3",
     "lint-staged": "^9.2.0",
     "prettier": "^1.18.2",
@@ -92,10 +96,5 @@
     "webpack-bundle-analyzer": "^3.3.2",
     "webpack-cli": "^3.3.6",
     "webpack-dev-server": "^3.7.2"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
   }
 }
