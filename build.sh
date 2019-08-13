@@ -1,1 +1,1 @@
-npm run build:example
+yarn && yarn build:example
