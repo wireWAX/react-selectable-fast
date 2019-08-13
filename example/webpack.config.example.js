@@ -7,9 +7,9 @@ module.exports = {
   },
   mode: 'development',
   devtool: 'eval',
-  entry: path.resolve(__dirname, 'src', 'index.tsx'),
+  entry: path.resolve(__dirname, './src/index.tsx'),
   output: {
-    path: path.resolve(__dirname),
+    path: path.resolve(__dirname, '../website'),
     publicPath: '',
     filename: 'bundle.js',
   },

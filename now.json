@@ -1,0 +1,8 @@
+{
+  "name": "react-selectable-fast",
+  "alias": "react-selectable-fast",
+  "public": true,
+  "version": 2,
+  "builds": [{ "src": "./website/**", "use": "@now/static" }],
+  "routes": [{ "src": "/(.*)", "dest": "website/$1" }]
+}

@@ -9,8 +9,6 @@
   "main": "lib/index.js",
   "scripts": {
     "clean": "rimraf ./lib ./dist",
-    "watch:example": "webpack-dev-server --config ./example/webpack.config.js --content-base example",
-    "build:example": "webpack --config ./example/webpack.config.js --mode production",
     "watch": "webpack --watch",
     "build": "webpack",
     "transpile": "tsc",
@@ -19,7 +17,9 @@
     "prettier": "prettier --write src/**/*.{js,ts,tsx} example/src/**/*.{js,ts,tsx} .js",
     "lint:basic": "tsc --pretty --noEmit && tslint --fix --format codeFrame",
     "lint": "yarn lint:basic --project ./tsconfig.json 'src/**/*.{ts,tsx} example/src/**/*.{ts,tsx}'",
-    "format": "npm run prettier && npm run lint"
+    "format": "npm run prettier && npm run lint",
+    "watch:example": "webpack-dev-server --config ./example/webpack.config.example.js --content-base website",
+    "build:example": "webpack --config ./example/webpack.config.example.js --mode production"
   },
   "lint-staged": {
     "*.{js,ts,tsx}": [
