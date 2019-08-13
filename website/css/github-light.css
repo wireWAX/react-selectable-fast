@@ -175,6 +175,10 @@ h2:hover .octicon {
   background-color: #00b9ce;
 }
 
+.button-container {
+  margin-left: 2px;
+}
+
 .btn {
   display: inline-block;
   margin-bottom: 1rem;

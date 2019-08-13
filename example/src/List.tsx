@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 import { TAlbumItem } from './sample-data'
 import { DeselectAll, SelectAll } from '../../src'
-import SelectableAlbum from './Album'
+import SelectableCard from './Card'
 
 type TListProps = {
   items: TAlbumItem[]
@@ -19,17 +19,17 @@ class List extends Component<TListProps> {
     return (
       <div>
         <p className="not-selectable">Press ESC to clear selection</p>
-        <div>
-          <SelectAll component="button" type="button" className="selectable-button">
+        <div className="button-container">
+          <SelectAll component="button" type="button" className="btn">
             Select all
           </SelectAll>
-          <DeselectAll component="button" type="button" className="selectable-button">
+          <DeselectAll component="button" type="button" className="btn">
             Clear selection
           </DeselectAll>
         </div>
         <div className="albums">
           {items.map(item => (
-            <SelectableAlbum key={item.year} title={item.title} year={item.year} />
+            <SelectableCard key={item.year} player={item.player} year={item.year} />
           ))}
         </div>
       </div>

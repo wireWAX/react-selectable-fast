@@ -86,7 +86,7 @@ const List = () => (
       <button>Clear selection</button>
     </DeselectAll>
     {this.props.items.map((item, i) => (
-      <SelectableComponent key={i} title={item.title} year={item.year} />
+      <SelectableComponent key={i} player={item.player} year={item.year} />
     ))}
   </div>
 )

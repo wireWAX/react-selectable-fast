@@ -4,15 +4,15 @@ import { createSelectable, TSelectableItemProps } from '../../src'
 import Label from './Label'
 
 type TAlbumProps = TSelectableItemProps & {
-  title: string
+  player: string
   year: number
 }
 
 const DISABLED_CARD_YEARS = [10, 22, 27, 54, 82, 105, 150]
 
-class Album extends Component<TAlbumProps> {
+class Card extends Component<TAlbumProps> {
   render() {
-    const { selectableRef, isSelected, isSelecting, title, year } = this.props
+    const { selectableRef, isSelected, isSelecting, player, year } = this.props
 
     const classNames = [
       'item',
@@ -26,7 +26,7 @@ class Album extends Component<TAlbumProps> {
     return (
       <div ref={selectableRef} className={classNames}>
         <div className="tick">+</div>
-        <h2>{title}</h2>
+        <h2>{player}</h2>
         <small>{year}</small>
         <Label isSelected={isSelected} isSelecting={isSelecting} />
       </div>
@@ -34,4 +34,4 @@ class Album extends Component<TAlbumProps> {
   }
 }
 
-export default createSelectable(Album)
+export default createSelectable(Card)

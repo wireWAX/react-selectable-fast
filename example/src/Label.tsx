@@ -10,7 +10,7 @@ class Label extends Component<TLabelProps> {
     const { isSelecting, isSelected } = this.props
 
     return (
-      <div className="album-label">
+      <div className="card-label">
         Selecting: <span>{`${isSelecting}`}</span>
         <br />
         Selected: <span>{`${isSelected}`}</span>

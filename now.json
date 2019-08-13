@@ -3,6 +3,12 @@
   "alias": "react-selectable-fast",
   "public": true,
   "version": 2,
-  "builds": [{ "src": "./website/**", "use": "@now/static" }],
-  "routes": [{ "src": "/(.*)", "dest": "website/$1" }]
+  "builds": [
+    { "src": "./build.sh", "use": "@now/static-build" },
+    { "src": "./website/**", "use": "@now/static" }
+  ],
+  "routes": [{ "src": "/(.*)", "dest": "website/$1" }],
+  "scripts": {
+    "build": "next build"
+  }
 }

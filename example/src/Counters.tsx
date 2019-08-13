@@ -30,7 +30,6 @@ class Counters extends Component {
         <br />
         Selected: <span className="counter">{selectedItems.length}</span>
         <br />
-        <br />
       </p>
     )
   }

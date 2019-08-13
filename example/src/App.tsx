@@ -51,10 +51,10 @@ class App extends Component<TAppProps> {
     return (
       <div>
         <Counters ref={this.countersRef} />
-        <button type="button" onClick={this.toggleFirstRow}>
+        <button className="btn" type="button" onClick={this.toggleFirstRow}>
           Toggle first row
         </button>
-        <button type="button" onClick={this.toggleOrder}>
+        <button className="btn" type="button" onClick={this.toggleOrder}>
           Toggle order
         </button>
         <SelectableGroup

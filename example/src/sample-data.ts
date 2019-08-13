@@ -1,37 +1,43 @@
 const titles = [
-  'My Aim is True',
-  "This Year's Model",
-  'Armed Forces',
-  'Get Happy',
-  'Trust',
-  'Almost Blue',
-  'Imperial Bedroom',
-  'Punch the Clock',
-  'Goodbye Cruel World',
-  'King of America',
-  'Blood and Chocolate',
-  'Spike',
-  'Mighty Like a Rose',
-  'The Juliette Letters',
-  'Brutal Youth',
-  'Kojak Variety',
-  'All This Useless Beauty',
-  'Painted from Memory',
-  'When I Was Cruel',
-  'North',
-  'The Delivery Man',
-  'The River in Reverse',
-  'Momofuku',
-  'Secret, Profane & Sugarcane',
-  'National Ransom'
+  'Michael Jordan',
+  'Kobe Bryant',
+  'Wilt Chamberlain',
+  'Magic Johnson',
+  'Kareem Abdul-Jabbar',
+  'Kevin Durant',
+  'Tim Duncan',
+  'Larry Bird',
+  'Shaquille ONeal',
+  'Jerry West',
+  'Moses Malone',
+  'Karl Malone',
+  'Julius Erving',
+  'Kevin Garnett',
+  'Charles Barkley',
+  'Dirk Nowitzki',
+  'Scottie Pippen',
+  'Dwyane Wade',
+  'David Robinson',
+  'Stephen Curry',
+  'Vince Carter',
+  'Clyde Drexler',
+  'Patrick Ewing',
+  'Steve Nash',
+  'Jason Kidd',
+  'Allen Iverson',
+  'Paul Pierce',
+  'Gary Payton',
+  'Ray Allen',
+  'Dwight Howard',
+  'Chris Paul'
 ]
 
 export type TAlbumItem = {
-  title: string
+  player: string
   year: number
 }
 
 export const items = Array.from({ length: 500 }).map((_, index) => ({
   year: index + 1,
-  title: titles[index % titles.length]
+  player: titles[index % titles.length]
 }))
