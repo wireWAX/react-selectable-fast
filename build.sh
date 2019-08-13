@@ -1,1 +1,1 @@
-yarn && yarn build:example
+yarn install --ignore-engines && yarn build:example
