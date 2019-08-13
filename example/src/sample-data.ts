@@ -23,10 +23,15 @@ const titles = [
   'The River in Reverse',
   'Momofuku',
   'Secret, Profane & Sugarcane',
-  'National Ransom',
+  'National Ransom'
 ]
 
-export default Array.from({ length: 500 }).map((item, index) => ({
+export type TAlbumItem = {
+  title: string
+  year: number
+}
+
+export const items = Array.from({ length: 500 }).map((_, index) => ({
   year: index + 1,
-  title: titles[index % titles.length],
+  title: titles[index % titles.length]
 }))

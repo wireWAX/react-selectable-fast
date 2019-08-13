@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 class Counters extends Component {
   state = {
     selectedItems: [],
-    selectingItems: [],
+    selectingItems: []
   }
 
   handleSelecting = selectingItems => {
@@ -15,10 +15,9 @@ class Counters extends Component {
   handleSelectionFinish = selectedItems => {
     this.setState({
       selectedItems,
-      selectingItems: [],
+      selectingItems: []
     })
 
-    // eslint-disable-next-line no-console
     console.log(`Finished selection ${selectedItems.length}`)
   }
 
@@ -27,13 +26,9 @@ class Counters extends Component {
 
     return (
       <p>
-        Selecting:
-{' '}
-<span className="counter">{selectingItems.length}</span>
+        Selecting: <span className="counter">{selectingItems.length}</span>
         <br />
-        Selected:
-{' '}
-<span className="counter">{selectedItems.length}</span>
+        Selected: <span className="counter">{selectedItems.length}</span>
         <br />
         <br />
       </p>

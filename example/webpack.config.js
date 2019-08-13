@@ -7,23 +7,21 @@ module.exports = {
   },
   mode: 'development',
   devtool: 'eval',
-  entry: path.resolve(__dirname, 'example.js'),
+  entry: path.resolve(__dirname, 'src', 'index.tsx'),
   output: {
     path: path.resolve(__dirname),
     publicPath: '',
     filename: 'bundle.js',
   },
-
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.(tsx|ts|js)$/,
         loader: 'babel-loader',
       },
     ],
   },
-
   resolve: {
-    modules: ['node_modules', 'dist'],
+    extensions: ['.ts', '.tsx', '.js'],
   },
 }

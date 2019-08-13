@@ -1,13 +1,21 @@
 import React, { Component } from 'react'
-import { SelectAll, DeselectAll } from '../src'
+
+import { TAlbumItem } from './sample-data'
+import { DeselectAll, SelectAll } from '../../src'
 import SelectableAlbum from './Album'
 
-class List extends Component {
-  shouldComponentUpdate(nextProps) {
+type TListProps = {
+  items: TAlbumItem[]
+}
+
+class List extends Component<TListProps> {
+  shouldComponentUpdate(nextProps: TListProps) {
     return nextProps.items !== this.props.items
   }
 
   render() {
+    const { items } = this.props
+
     return (
       <div>
         <p className="not-selectable">Press ESC to clear selection</p>
@@ -20,7 +28,7 @@ class List extends Component {
           </DeselectAll>
         </div>
         <div className="albums">
-          {this.props.items.map(item => (
+          {items.map(item => (
             <SelectableAlbum key={item.year} title={item.title} year={item.year} />
           ))}
         </div>

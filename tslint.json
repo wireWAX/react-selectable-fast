@@ -1,0 +1,49 @@
+{
+  "extends": ["tslint-config-airbnb", "tslint-react", "tslint-config-prettier"],
+  "rules": {
+    "variable-name": [
+      true,
+      "ban-keywords",
+      "check-format",
+      "allow-pascal-case",
+      "allow-leading-underscore"
+    ],
+    "import-name": false,
+    "curly": true,
+    "no-consecutive-blank-lines": true,
+    "newline-before-return": true,
+    "no-increment-decrement": false,
+    "function-name": false,
+    "radix": false,
+    "no-this-assignment": [
+      true,
+      {
+        "allow-destructuring": true
+      }
+    ],
+    "no-parameter-reassignment": false,
+    "ordered-imports": [
+      true,
+      {
+        "named-imports-order": "lowercase-first",
+        "import-sources-order": "any",
+        "grouped-imports": true,
+        "groups": [
+          {
+            "name": "relative directories",
+            "match": "^\\.",
+            "order": 20
+          },
+          {
+            "name": "third-party",
+            "match": ".*",
+            "order": 10
+          }
+        ]
+      }
+    ]
+  },
+  "linterOptions": {
+    "exclude": ["**/coverage/**", "**/node_modules/**"]
+  }
+}

@@ -1,4 +1,4 @@
-# React-selectable-fast ![npm](https://img.shields.io/npm/v/react-selectable-fast.svg) ![license](https://img.shields.io/npm/l/react-selectable-fast.svg)
+# React-selectable-fast ![npm](https://img.shields.io/npm/v/react-selectable-fast.svg?style=for-the-badge) ![license](https://img.shields.io/npm/l/react-selectable-fast.svg?style=for-the-badge)
 
 Enable a React component (or group of components) to be selectable via mouse/touch.
 
@@ -21,7 +21,7 @@ The main idea of this fork is to eliminate render during selection caused by sta
 
 ## Usage
 
-Package exports 4 entities `{ SelectableGroup, createSelectable, SelectAll, DeselectAll }`.
+Package exports 5 entities `{ TSelectableItemProps, SelectableGroup, createSelectable, SelectAll, DeselectAll }`.
 To make other components selectable wrap them using HoC `createSelectable`, add passed `selectableRef` prop to the target node and put a list of seletable items under `SelectableGroup`.
 
 ```js

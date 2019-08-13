@@ -6,7 +6,7 @@ const env = process.env.NODE_ENV || 'development'
 module.exports = {
   devtool: 'eval',
   mode: env,
-  entry: path.resolve(__dirname, 'src', 'index.js'),
+  entry: path.resolve(__dirname, 'src', 'index.ts'),
   output: {
     path: path.resolve(__dirname, 'lib'),
     filename: 'react-selectable-fast.js',
@@ -14,11 +14,14 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.(js|ts|tsx)$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
       },
     ],
+  },
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js'],
   },
   plugins: [
     // new BundleAnalyzerPlugin(),

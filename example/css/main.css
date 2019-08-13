@@ -22,6 +22,43 @@ a:hover {
 
 /* Gh-pages theme */
 
+.anchor {
+  float: left;
+  padding-right: 4px;
+  margin-left: -22px;
+}
+
+.octicon {
+  display: inline-block;
+  visibility: hidden;
+}
+
+h3:hover .octicon,
+h2:hover .octicon {
+  visibility: visible;
+}
+
+.octicon.octicon-link {
+  -webkit-mask-size: cover;
+  background-color: #159957;
+  width: 18px;
+  height: 18px;
+  -webkit-mask: url(https://cdnjs.cloudflare.com/ajax/libs/octicons/8.5.0/svg/link.svg) no-repeat
+    50% 50%;
+  mask: url(https://cdnjs.cloudflare.com/ajax/libs/octicons/8.5.0/svg/link.svg) no-repeat 50% 50%;
+  -webkit-mask-size: cover;
+  mask-size: cover;
+}
+
+.github-fork-ribbon:before {
+  background-color: #09a;
+  transition: background-color 100ms ease-in;
+}
+
+.github-fork-ribbon:hover:before {
+  background-color: #00b9ce;
+}
+
 .btn {
   display: inline-block;
   margin-bottom: 1rem;
@@ -33,6 +70,7 @@ a:hover {
   border-radius: 0.3rem;
   transition: color 0.2s, background-color 0.2s, border-color 0.2s;
 }
+
 .btn + .btn {
   margin-left: 1rem;
 }
