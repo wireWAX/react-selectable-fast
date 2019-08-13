@@ -1,0 +1,15 @@
+{
+  "name": "react-selectable-fast",
+  "alias": "react-selectable-fast",
+  "public": true,
+  "version": 2,
+  "builds": [
+    {
+      "src": "./build.sh",
+      "use": "@now/static-build",
+      "config": { "distDir": "website" }
+    },
+    { "src": "./website/**", "use": "@now/static" }
+  ],
+  "routes": [{ "src": "/(.*)", "dest": "website/$1" }]
+}

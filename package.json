@@ -1,6 +1,6 @@
 {
   "name": "react-selectable-fast",
-  "version": "2.3.1",
+  "version": "3.0.0",
   "description": "Enable other React components to be selectable by drawing a box with your mouse/touch",
   "repository": {
     "type": "git",
@@ -9,26 +9,36 @@
   "main": "lib/index.js",
   "scripts": {
     "clean": "rimraf ./lib ./dist",
-    "watch:example": "webpack-dev-server --config ./example/webpack.config.js --content-base example",
-    "build:example": "webpack --config ./example/webpack.config.js --mode production",
     "watch": "webpack --watch",
     "build": "webpack",
-    "transpile": "babel ./src/ -d ./lib/",
-    "build:prod": "cross-env NODE_ENV=production webpack --config webpack.production.config.js",
-    "prepublish": "npm run lint && npm run clean && npm run build:prod && npm run transpile",
-    "prettier": "npx prettier --write src/**/*.js example/**/*.js *.js",
-    "lint": "npx eslint --fix --ext js .",
-    "format": "npm run prettier && npm run lint"
+    "transpile": "tsc",
+    "build:prod": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js",
+    "prepublishOnly": "yarn lint && yarn clean && yarn build:prod && yarn transpile",
+    "prettier": "prettier --write src/**/*.{js,ts,tsx} example/src/**/*.{js,ts,tsx} .js",
+    "lint:basic": "tsc --pretty --noEmit && tslint --fix --format codeFrame",
+    "lint": "yarn lint:basic --project ./tsconfig.json 'src/**/*.{ts,tsx} example/src/**/*.{ts,tsx}'",
+    "format": "yarn prettier && yarn lint",
+    "test": "yarn lint",
+    "watch:example": "webpack-dev-server --config ./example/webpack.config.example.js --content-base website",
+    "build:example": "webpack --config ./example/webpack.config.example.js --mode production"
   },
   "lint-staged": {
-    "*.js": [
+    "*.{js,ts,tsx}": [
       "prettier --write",
-      "eslint --fix",
+      "yarn lint:basic",
       "git add"
     ]
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
   "bugs": {
     "url": "https://github.com/valerybugakov/react-selectable-fast/issues"
+  },
+  "engines": {
+    "node": ">8.0.0"
   },
   "keywords": [
     "selectable",
@@ -41,7 +51,10 @@
     "touch",
     "react"
   ],
-  "author": "Valery Bugakov <skymk1@gmail.com>",
+  "author": "Valery Bugakov <skymk1@gmail.com> (https://github.com/valerybugakov/)",
+  "contributors": [
+    "Valery Bugakov <skymk1@gmail.com> (https://github.com/valerybugakov/)"
+  ],
   "license": "MIT",
   "files": [
     "lib",
@@ -61,31 +74,27 @@
     "@babel/plugin-proposal-class-properties": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
     "@babel/preset-react": "^7.0.0",
-    "babel-eslint": "^10.0.2",
+    "@babel/preset-typescript": "^7.3.3",
+    "@types/react": "^16.9.1",
+    "@types/react-dom": "^16.8.5",
     "babel-loader": "^8.0.6",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "cross-env": "^5.2.0",
-    "eslint": "^6.0.1",
-    "eslint-config-airbnb": "^17.1.1",
-    "eslint-plugin-babel": "^5.1.0",
-    "eslint-plugin-import": "^2.18.0",
-    "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-react": "^7.14.2",
-    "husky": "^3.0.0",
+    "husky": "^3.0.3",
     "lint-staged": "^9.2.0",
     "prettier": "^1.18.2",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "rimraf": "^2.6.3",
+    "tslint": "^5.18.0",
+    "tslint-config-airbnb": "^5.11.1",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-react": "^4.0.0",
+    "typescript": "^3.5.3",
     "webpack": "^4.36.1",
     "webpack-bundle-analyzer": "^3.3.2",
     "webpack-cli": "^3.3.6",
     "webpack-dev-server": "^3.7.2"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
   }
 }

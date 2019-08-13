@@ -21,10 +21,15 @@ The main idea of this fork is to eliminate render during selection caused by sta
 
 ## Usage
 
-Package exports 4 entities `{ SelectableGroup, createSelectable, SelectAll, DeselectAll }`.
+Package exports 5 entities
+
+```ts
+export { TSelectableItemProps, SelectableGroup, createSelectable, SelectAll, DeselectAll }
+```
+
 To make other components selectable wrap them using HoC `createSelectable`, add passed `selectableRef` prop to the target node and put a list of seletable items under `SelectableGroup`.
 
-```js
+```ts
 import React, { Component } from 'react'
 import { SelectableGroup } from 'react-selectable-fast'
 
@@ -52,16 +57,22 @@ class App extends Component {
 }
 ```
 
-```js
+```ts
 import React from 'react'
-import { createSelectable } from 'react-selectable-fast'
+import { TSelectableItemProps, createSelectable } from 'react-selectable-fast'
 
-const SomeComponent = ({ selectableRef, selected, selecting }) => <div ref={selectableRef}>...</div>
+class SomeComponent extends Component<TSelectableItemProps> {
+  render() {
+    const { selectableRef, isSelected, isSelecting } = this.props
+
+    return <div ref={selectableRef}>...</div>
+  }
+}
 
 export default createSelectable(SomeComponent)
 ```
 
-```js
+```ts
 import React from 'react'
 import { SelectAll, DeselectAll } from 'react-selectable-fast'
 import SelectableComponent from './SomeComponent'
@@ -75,7 +86,7 @@ const List = () => (
       <button>Clear selection</button>
     </DeselectAll>
     {this.props.items.map((item, i) => (
-      <SelectableComponent key={i} title={item.title} year={item.year} />
+      <SelectableComponent key={i} player={item.player} year={item.year} />
     ))}
   </div>
 )
@@ -93,9 +104,9 @@ polyfill in your bundled application, such as [core-js](https://github.com/zloir
 [babel-polyfill](https://babeljs.io/docs/usage/polyfill/).
 
 A polyfilled environment for React-Selectable-Fast using [core-js](https://github.com/zloirock/core-js) to support older browsers
-might look like:
+might look like this:
 
-```js
+```ts
 import 'core-js/fn/object/assign'
 import 'core-js/fn/array/from'
 import 'core-js/fn/array/is-array'

@@ -1,3 +1,17 @@
+export type TGetBoundsForNodeArgs = {
+  scrollTop: number
+  scrollLeft: number
+}
+
+export type TComputedBounds = {
+  top: number
+  left: number
+  width: number
+  height: number
+  offsetWidth: number
+  offsetHeight: number
+}
+
 export function getDocumentScroll() {
   const documentScrollTop = Math.max(
     window.pageYOffset,
@@ -16,10 +30,11 @@ export function getDocumentScroll() {
 
 /**
  * Given a node, get everything needed to calculate its boundaries
- * @param  {HTMLElement} node
- * @return {Object}
  */
-export default function getBoundsForNode(node, containerScroll = { scrollTop: 0, scrollLeft: 0 }) {
+export function getBoundsForNode(
+  node: HTMLElement,
+  containerScroll: TGetBoundsForNodeArgs = { scrollTop: 0, scrollLeft: 0 }
+) {
   const { scrollTop, scrollLeft } = containerScroll
   const { documentScrollTop, documentScrollLeft } = getDocumentScroll()
 
@@ -30,7 +45,7 @@ export default function getBoundsForNode(node, containerScroll = { scrollTop: 0,
     left: rect.left + documentScrollLeft + scrollLeft,
     offsetWidth: node.offsetWidth,
     offsetHeight: node.offsetHeight,
-    computedWidth: rect.width,
-    computedHeight: rect.height,
+    width: rect.width,
+    height: rect.height
   }
 }

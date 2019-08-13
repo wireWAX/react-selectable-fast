@@ -1,14 +1,21 @@
-import React, { Component, createRef } from 'react'
-import { SelectableGroup } from '../src'
+import React, { createRef, Component } from 'react'
+
+import { TAlbumItem } from './sample-data'
+import { SelectableGroup } from '../../src'
 import Counters from './Counters'
 import List from './List'
 
-class App extends Component {
+type TAppProps = {
+  items: TAlbumItem[]
+}
+
+class App extends Component<TAppProps> {
   state = {
     disableFirstRow: false,
+    reversed: false
   }
 
-  countersRef = createRef()
+  countersRef = createRef<Counters>()
 
   handleSelecting = selectingItems => {
     this.countersRef.current.handleSelecting(selectingItems)
@@ -19,7 +26,7 @@ class App extends Component {
   }
 
   handleSelectionClear() {
-    console.log('Cancel selection') // eslint-disable-line no-console
+    console.log('Cancel selection')
   }
 
   toggleFirstRow = () => {
@@ -28,6 +35,10 @@ class App extends Component {
 
   toggleOrder = () => {
     this.setState({ reversed: !this.state.reversed })
+  }
+
+  getSelectableGroupRef = (ref: SelectableGroup | null) => {
+    ;(window as any).selectableGroup = ref
   }
 
   render() {
@@ -40,19 +51,19 @@ class App extends Component {
     return (
       <div>
         <Counters ref={this.countersRef} />
-        <button type="button" onClick={this.toggleFirstRow}>
+        <button className="btn" type="button" onClick={this.toggleFirstRow}>
           Toggle first row
         </button>
-        <button type="button" onClick={this.toggleOrder}>
+        <button className="btn" type="button" onClick={this.toggleOrder}>
           Toggle order
         </button>
         <SelectableGroup
-          ref={ref => (window.selectableGroup = ref)}
+          ref={this.getSelectableGroupRef}
           className="main"
           clickClassName="tick"
-          enableDeselect
+          enableDeselect={true}
           tolerance={0}
-          deselectOnEsc={false}
+          deselectOnEsc={true}
           allowClickWithoutSelected={false}
           duringSelection={this.handleSelecting}
           onSelectionClear={this.handleSelectionClear}
