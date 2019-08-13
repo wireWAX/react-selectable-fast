@@ -15,8 +15,8 @@ export type TSelectableGroupContext = {
 }
 
 export type TSelectableItemState = {
-  selected: boolean
-  selecting: boolean
+  isSelected: boolean
+  isSelecting: boolean
 }
 
 export type TSelectableItem = Component & {
@@ -27,8 +27,6 @@ export type TSelectableItem = Component & {
   bounds: Maybe<TComputedBounds>
 }
 
-export type TSelectableItemProps = {
-  selected: boolean
-  selecting: boolean
+export type TSelectableItemProps = TSelectableItemState & {
   selectableRef(node: HTMLElement | null): void
 }

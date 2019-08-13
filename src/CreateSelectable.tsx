@@ -10,16 +10,16 @@ const createSelectable = (WrappedComponent: ComponentType<any>) =>
     static contextType = SelectableGroupContext
 
     static propTypes = {
-      selected: bool
+      isSelected: bool
     }
 
     static defaultProps = {
-      selected: false
+      isSelected: false
     }
 
     state = {
-      selected: this.props.selected,
-      selecting: false
+      isSelected: this.props.isSelected,
+      isSelecting: false
     }
 
     node: HTMLElement | null = null
@@ -44,12 +44,7 @@ const createSelectable = (WrappedComponent: ComponentType<any>) =>
 
     render() {
       return (
-        <WrappedComponent
-          {...this.props}
-          selected={this.state.selected}
-          selecting={this.state.selecting}
-          selectableRef={this.getSelectableRef}
-        />
+        <WrappedComponent {...this.props} {...this.state} selectableRef={this.getSelectableRef} />
       )
     }
   }

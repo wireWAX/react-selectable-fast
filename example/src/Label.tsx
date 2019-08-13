@@ -1,19 +1,19 @@
 import React, { Component } from 'react'
 
 type TLabelProps = {
-  selecting: boolean
-  selected: boolean
+  isSelecting: boolean
+  isSelected: boolean
 }
 
 class Label extends Component<TLabelProps> {
   render() {
-    const { selecting, selected } = this.props
+    const { isSelecting, isSelected } = this.props
 
     return (
       <div className="album-label">
-        Selecting: <span>{`${selecting}`}</span>
+        Selecting: <span>{`${isSelecting}`}</span>
         <br />
-        Selected: <span>{`${selected}`}</span>
+        Selected: <span>{`${isSelected}`}</span>
       </div>
     )
   }

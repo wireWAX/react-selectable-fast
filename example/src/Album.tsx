@@ -12,13 +12,13 @@ const DISABLED_CARD_YEARS = [10, 22, 27, 54, 82, 105, 150]
 
 class Album extends Component<TAlbumProps> {
   render() {
-    const { selectableRef, selected, selecting, title, year } = this.props
+    const { selectableRef, isSelected, isSelecting, title, year } = this.props
 
     const classNames = [
       'item',
       DISABLED_CARD_YEARS.includes(year) && 'not-selectable',
-      selecting && 'selecting',
-      selected && 'selected'
+      isSelecting && 'selecting',
+      isSelected && 'selected'
     ]
       .filter(Boolean)
       .join(' ')
@@ -28,7 +28,7 @@ class Album extends Component<TAlbumProps> {
         <div className="tick">+</div>
         <h2>{title}</h2>
         <small>{year}</small>
-        <Label selected={selected} selecting={selecting} />
+        <Label isSelected={isSelected} isSelecting={isSelecting} />
       </div>
     )
   }

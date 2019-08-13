@@ -191,7 +191,7 @@ class SelectableGroup extends Component<TSelectableGroupProps> {
 
   registerSelectable = (selectableItem: TSelectableItem) => {
     this.registry.add(selectableItem)
-    if (selectableItem.state.selected) {
+    if (selectableItem.state.isSelected) {
       this.selectedItems.add(selectableItem)
     }
   }
@@ -200,6 +200,8 @@ class SelectableGroup extends Component<TSelectableGroupProps> {
     this.registry.delete(selectableItem)
     this.selectedItems.delete(selectableItem)
     this.selectingItems.delete(selectableItem)
+
+    this.props.onSelectionFinish!([...this.selectedItems])
   }
 
   toggleSelectionMode() {
@@ -343,23 +345,23 @@ class SelectableGroup extends Component<TSelectableGroupProps> {
     }
 
     const isCollided = doObjectsCollide(selectboxBounds, item.bounds!, tolerance, this.props.delta)
-    const { selecting, selected } = item.state
+    const { isSelecting, isSelected } = item.state
 
     if (isFromClick && isCollided) {
-      if (selected) {
+      if (isSelected) {
         this.selectedItems.delete(item)
       } else {
         this.selectedItems.add(item)
       }
 
-      item.setState({ selected: !selected })
+      item.setState({ isSelected: !isSelected })
 
       return (this.clickedItem = item)
     }
 
     if (!isFromClick && isCollided) {
-      if (selected && enableDeselect && (!this.selectionStarted || mixedDeselect)) {
-        item.setState({ selected: false })
+      if (isSelected && enableDeselect && (!this.selectionStarted || mixedDeselect)) {
+        item.setState({ isSelected: false })
         item.deselected = true
 
         this.deselectionStarted = true
@@ -369,8 +371,8 @@ class SelectableGroup extends Component<TSelectableGroupProps> {
 
       const canSelect = mixedDeselect ? !item.deselected : !this.deselectionStarted
 
-      if (!selecting && !selected && canSelect) {
-        item.setState({ selecting: true })
+      if (!isSelecting && !isSelected && canSelect) {
+        item.setState({ isSelecting: true })
 
         this.selectionStarted = true
         this.selectingItems.add(item)
@@ -379,9 +381,9 @@ class SelectableGroup extends Component<TSelectableGroupProps> {
       }
     }
 
-    if (!isFromClick && !isCollided && selecting) {
+    if (!isFromClick && !isCollided && isSelecting) {
       if (this.selectingItems.has(item)) {
-        item.setState({ selecting: false })
+        item.setState({ isSelecting: false })
 
         this.selectingItems.delete(item)
 
@@ -394,7 +396,7 @@ class SelectableGroup extends Component<TSelectableGroupProps> {
 
   clearSelection = () => {
     for (const item of this.selectedItems.values()) {
-      item.setState({ selected: false })
+      item.setState({ isSelected: false })
       this.selectedItems.delete(item)
     }
 
@@ -407,8 +409,8 @@ class SelectableGroup extends Component<TSelectableGroupProps> {
     this.updateWhiteListNodes()
 
     for (const item of this.registry.values()) {
-      if (!this.isInIgnoreList(item.node) && !item.state.selected) {
-        item.setState({ selected: true })
+      if (!this.isInIgnoreList(item.node) && !item.state.isSelected) {
+        item.setState({ isSelected: true })
         this.selectedItems.add(item)
       }
     }
@@ -532,7 +534,7 @@ class SelectableGroup extends Component<TSelectableGroupProps> {
       this.handleClick(evt, pageY, pageX)
     } else {
       for (const item of this.selectingItems.values()) {
-        item.setState({ selected: true, selecting: false })
+        item.setState({ isSelected: true, isSelecting: false })
       }
       this.selectedItems = new Set([...this.selectedItems, ...this.selectingItems])
       this.selectingItems.clear()
