@@ -7,7 +7,7 @@ const env = process.env.NODE_ENV || 'production'
 module.exports = {
   devtool: 'source-map',
   mode: env,
-  entry: path.resolve(__dirname, 'src', 'index.js'),
+  entry: path.resolve(__dirname, 'src', 'index.ts'),
   externals: {
     react: {
       root: 'React',
@@ -31,6 +31,9 @@ module.exports = {
         loader: 'babel-loader',
       },
     ],
+  },
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js'],
   },
   plugins: [
     // new BundleAnalyzerPlugin(),

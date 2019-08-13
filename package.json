@@ -1,6 +1,6 @@
 {
   "name": "react-selectable-fast",
-  "version": "2.3.1",
+  "version": "2.4.0",
   "description": "Enable other React components to be selectable by drawing a box with your mouse/touch",
   "repository": {
     "type": "git",
@@ -14,17 +14,17 @@
     "watch": "webpack --watch",
     "build": "webpack",
     "transpile": "tsc",
-    "build:prod": "cross-env NODE_ENV=production webpack --config webpack.production.config.js",
+    "build:prod": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js",
     "prepublishOnly": "npm run lint && npm run clean && npm run build:prod && npm run transpile",
     "prettier": "prettier --write src/**/*.{js,ts,tsx} example/src/**/*.{js,ts,tsx} .js",
-    "lint": "tsc --pretty --noEmit && tslint --fix --format codeFrame",
-    "lint:all": "yarn lint --project ./tsconfig.json 'src/**/*.{ts,tsx} example/src/**/*.{ts,tsx}'",
+    "lint:basic": "tsc --pretty --noEmit && tslint --fix --format codeFrame",
+    "lint": "yarn lint:basic --project ./tsconfig.json 'src/**/*.{ts,tsx} example/src/**/*.{ts,tsx}'",
     "format": "npm run prettier && npm run lint"
   },
   "lint-staged": {
     "*.{js,ts,tsx}": [
       "prettier --write",
-      "yarn lint",
+      "yarn lint:basic",
       "git add"
     ]
   },
