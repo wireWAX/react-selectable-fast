@@ -22,7 +22,7 @@
     "format": "npm run prettier && npm run lint"
   },
   "lint-staged": {
-    "*.js": [
+    "*.{js,ts,tsx}": [
       "prettier --write",
       "yarn lint",
       "git add"

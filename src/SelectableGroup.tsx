@@ -446,6 +446,7 @@ class SelectableGroup extends Component<TSelectableGroupProps> {
     }
 
     this.updateWhiteListNodes()
+
     if (this.isInIgnoreList(e.target as HTMLElement)) {
       this.mouseDownStarted = false
 
