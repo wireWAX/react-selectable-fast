@@ -1,4 +1,4 @@
-# React-selectable-fast ![npm](https://img.shields.io/npm/v/react-selectable-fast.svg?style=for-the-badge) ![license](https://img.shields.io/npm/l/react-selectable-fast.svg?style=for-the-badge)
+# React-selectable-fast ![npm](https://img.shields.io/npm/v/react-selectable-fast.svg) ![license](https://img.shields.io/npm/l/react-selectable-fast.svg)
 
 Enable a React component (or group of components) to be selectable via mouse/touch.
 
