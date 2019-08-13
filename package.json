@@ -37,6 +37,9 @@
   "bugs": {
     "url": "https://github.com/valerybugakov/react-selectable-fast/issues"
   },
+  "engines": {
+    "node": ">8.0.0"
+  },
   "keywords": [
     "selectable",
     "selection",
