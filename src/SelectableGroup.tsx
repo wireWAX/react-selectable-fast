@@ -524,7 +524,7 @@ class SelectableGroup extends Component<TSelectableGroupProps> {
       return
     }
 
-    const evt = castTouchToMouseEvent(event)
+    const evt: any = castTouchToMouseEvent(event)
     const { pageX, pageY } = evt
 
     if (!this.mouseMoved && isNodeInRoot(evt.target as HTMLElement, this.selectableGroup!)) {
@@ -553,7 +553,7 @@ class SelectableGroup extends Component<TSelectableGroupProps> {
     this.mouseMoved = false
   }
 
-  handleClick(evt: MouseEvent<HTMLElement>, top: number, left: number) {
+  handleClick(evt: any, top: number, left: number) {
     const { clickClassName, allowClickWithoutSelected, onSelectionFinish } = this.props
     const classNames = (evt.target as HTMLElement).classList || []
     const isMouseUpOnClickElement = Array.from(classNames).indexOf(clickClassName!) > -1
