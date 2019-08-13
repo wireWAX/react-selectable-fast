@@ -81,6 +81,7 @@
   border-color: #206748;
 }
 
+.item.not-selectable .tick,
 .item.selected .tick {
   color: white;
 }

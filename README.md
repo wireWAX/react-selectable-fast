@@ -104,7 +104,7 @@ polyfill in your bundled application, such as [core-js](https://github.com/zloir
 [babel-polyfill](https://babeljs.io/docs/usage/polyfill/).
 
 A polyfilled environment for React-Selectable-Fast using [core-js](https://github.com/zloirock/core-js) to support older browsers
-might look like:
+might look like this:
 
 ```ts
 import 'core-js/fn/object/assign'
