@@ -1,4 +1,4 @@
-const titles = [
+const players = [
   'Michael Jordan',
   'Kobe Bryant',
   'Wilt Chamberlain',
@@ -39,5 +39,5 @@ export type TAlbumItem = {
 
 export const items = Array.from({ length: 500 }).map((_, index) => ({
   year: index + 1,
-  player: titles[index % titles.length]
+  player: players[index % players.length]
 }))
