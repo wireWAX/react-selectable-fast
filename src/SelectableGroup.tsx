@@ -51,6 +51,8 @@ export type TSelectableGroupProps = {
   resetOnStart?: boolean
   disabled?: boolean
   delta?: number
+  allowShiftClick?: boolean
+  selectOnClick?: boolean
   /**
    * Scroll container selector
    */
@@ -104,7 +106,9 @@ class SelectableGroup extends Component<TSelectableGroupProps> {
     disabled: false,
     deselectOnEsc: true,
     fixedPosition: false,
-    delta: 1
+    delta: 1,
+    allowShiftClick: false,
+    selectOnClick: true
   }
 
   state = { selectionMode: false }
@@ -442,7 +446,9 @@ class SelectableGroup extends Component<TSelectableGroupProps> {
   }
 
   mouseDown = (e: Event) => {
-    const isNotLeftButtonClick = !e.type.includes('touch') && !detectMouseButton(e as any, 1)
+    const isNotLeftButtonClick =
+      !e.type.includes('touch') &&
+      !detectMouseButton(e as any, 1, { allowShiftClick: this.props.allowShiftClick })
     if (this.mouseDownStarted || this.props.disabled || isNotLeftButtonClick) {
       return
     }
@@ -557,6 +563,10 @@ class SelectableGroup extends Component<TSelectableGroupProps> {
   }
 
   handleClick(evt: any, top: number, left: number) {
+    if (!this.props.selectOnClick) {
+      return
+    }
+
     const { clickClassName, allowClickWithoutSelected, onSelectionFinish } = this.props
     const classNames = (evt.target as HTMLElement).classList || []
     const isMouseUpOnClickElement = Array.from(classNames).indexOf(clickClassName!) > -1
