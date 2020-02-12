@@ -140,4 +140,7 @@ The `<SelectableGroup />` component accepts a few optional props:
 - `disabled` (Boolean) Enable or disable the selectable draggable, useful if you want to enable drag of sub-items. Default value is `false`.
 - `delta` (Number) Value of the CSS transform property scaled list, useful if your list of items in `<SelectableGroup />` is wrapped by a scale css transform property. Default value is `1`.
 - `selectOnClick` (Boolean) Allow selecting by clicking items. Default value is `true`
-- `allowShiftClick` (Boolean) Perform select actions even though the shift key is down when clicking or dragging. Default value is `false`
+- `allowAltClick` (Boolean) Perform select actions even though the `alt` key is down when clicking or dragging. Default value is `false`
+- `allowCtrlClick` (Boolean) Perform select actions even though the `ctrl` key is down when clicking or dragging. Default value is `false`
+- `allowMetaClick` (Boolean) Perform select actions even though the `meta` key is down when clicking or dragging. Default value is `false`
+- `allowShiftClick` (Boolean) Perform select actions even though the `shift` key is down when clicking or dragging. Default value is `false`

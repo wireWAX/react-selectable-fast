@@ -51,6 +51,9 @@ export type TSelectableGroupProps = {
   resetOnStart?: boolean
   disabled?: boolean
   delta?: number
+  allowAltClick?: boolean
+  allowCtrlClick?: boolean
+  allowMetaClick?: boolean
   allowShiftClick?: boolean
   selectOnClick?: boolean
   /**
@@ -107,6 +110,9 @@ class SelectableGroup extends Component<TSelectableGroupProps> {
     deselectOnEsc: true,
     fixedPosition: false,
     delta: 1,
+    allowAltClick: false,
+    allowCtrlClick: false,
+    allowMetaClick: false,
     allowShiftClick: false,
     selectOnClick: true
   }
@@ -455,7 +461,12 @@ class SelectableGroup extends Component<TSelectableGroupProps> {
   mouseDown = (e: Event) => {
     const isNotLeftButtonClick =
       !e.type.includes('touch') &&
-      !detectMouseButton(e as any, 1, { allowShiftClick: this.props.allowShiftClick })
+      !detectMouseButton(e as any, 1, {
+        allowAltClick: this.props.allowAltClick,
+        allowCtrlClick: this.props.allowCtrlClick,
+        allowMetaClick: this.props.allowMetaClick,
+        allowShiftClick: this.props.allowShiftClick
+      })
     if (this.mouseDownStarted || this.props.disabled || isNotLeftButtonClick) {
       return
     }
