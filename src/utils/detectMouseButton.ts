@@ -1,6 +1,9 @@
 import { MouseEvent } from 'react'
 
 type TDetectMouseButtonOptions = {
+  allowAltClick?: Boolean
+  allowCtrlClick?: Boolean
+  allowMetaClick?: Boolean
   allowShiftClick?: Boolean
 }
 
@@ -15,7 +18,12 @@ export function detectMouseButton(
   buttonNumber = 1,
   options: TDetectMouseButtonOptions = {}
 ) {
-  if (evt.metaKey || evt.ctrlKey || evt.altKey || (evt.shiftKey && !options.allowShiftClick)) {
+  if (
+    (evt.metaKey && !options.allowMetaClick) ||
+    (evt.ctrlKey && !options.allowCtrlClick) ||
+    (evt.altKey && !options.allowAltClick) ||
+    (evt.shiftKey && !options.allowShiftClick)
+  ) {
     return false
   }
 
