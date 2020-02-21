@@ -330,9 +330,9 @@ class SelectableGroup extends Component<TSelectableGroupProps> {
     const selectboxBounds = getBoundsForNode(selectboxNode)
 
     this.selectItems({
-      ...selectboxBounds,
-      offsetWidth: selectboxBounds.offsetWidth || 1,
-      offsetHeight: selectboxBounds.offsetHeight || 1
+      ...selectboxBounds[0],
+      offsetWidth: selectboxBounds[0].offsetWidth || 1,
+      offsetHeight: selectboxBounds[0].offsetHeight || 1
     })
   }
 
@@ -361,7 +361,10 @@ class SelectableGroup extends Component<TSelectableGroupProps> {
       return null
     }
 
-    const isCollided = doObjectsCollide(selectboxBounds, item.bounds!, tolerance, this.props.delta)
+    let isCollided = false;
+    for (let i = 0; i < item.bounds.length; i+=1) {
+        isCollided = doObjectsCollide(selectboxBounds, item.bounds[i], tolerance, this.props.delta);
+    }
     const { isSelecting, isSelected } = item.state
 
     if (isFromClick && isCollided) {
@@ -490,12 +493,12 @@ class SelectableGroup extends Component<TSelectableGroupProps> {
       const offsetData = getBoundsForNode(this.selectableGroup!)
       const collides = doObjectsCollide(
         {
-          top: offsetData.top,
-          left: offsetData.left,
+          top: offsetData[0].top,
+          left: offsetData[0].left,
           width: 0,
           height: 0,
-          offsetHeight: offsetData.offsetHeight,
-          offsetWidth: offsetData.offsetWidth
+          offsetHeight: offsetData[0].offsetHeight,
+          offsetWidth: offsetData[0].offsetWidth
         },
         {
           top: evt.pageY,
