@@ -23,6 +23,7 @@ const createSelectable = (WrappedComponent: ComponentType<any>) =>
     }
 
     node: HTMLElement | null = null
+
     bounds: TComputedBounds | null = null
 
     componentDidMount() {

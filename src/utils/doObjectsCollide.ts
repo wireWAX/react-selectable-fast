@@ -37,8 +37,8 @@ const areBoundsCollide = (
 export function doObjectsCollide(
   a: HTMLElement | TComputedBounds,
   b: HTMLElement | TComputedBounds,
-  tolerance: number = 0,
-  delta: number = 1
+  tolerance = 0,
+  delta = 1
 ) {
   const aObj = a instanceof HTMLElement ? getBoundsForNode(a) : a
   const bObj = b instanceof HTMLElement ? getBoundsForNode(b) : b
