@@ -15,7 +15,7 @@
     "build:prod": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js",
     "prepublishOnly": "yarn lint && yarn clean && yarn build:prod && yarn transpile",
     "prettier": "prettier --write src/**/*.{js,ts,tsx} example/src/**/*.{js,ts,tsx} .js",
-    "lint:basic": "tsc --pretty --noEmit && eslint --fix --format codeFrame",
+    "lint:basic": "tsc --pretty --noEmit && eslint --fix --format codeframe",
     "lint": "yarn lint:basic '{example/,}src/**/*.{ts,tsx}'",
     "format": "yarn prettier && yarn lint",
     "test": "yarn lint",
