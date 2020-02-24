@@ -19,6 +19,7 @@
     "lint": "yarn lint:basic '{example/,}src/**/*.{ts,tsx}'",
     "format": "yarn prettier && yarn lint",
     "test": "yarn lint",
+    "release": "release-it",
     "watch:example": "webpack-dev-server --config ./example/webpack.config.example.js --content-base website",
     "build:example": "webpack --config ./example/webpack.config.example.js --mode production"
   },
@@ -95,6 +96,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "release-it": "^12.6.1",
     "rimraf": "^3.0.2",
     "typescript": "^3.8.2",
     "webpack": "^4.41.6",
