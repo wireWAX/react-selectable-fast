@@ -1,0 +1,10 @@
+{
+  "git": {
+    "tagName": "v${version}",
+    "commitMessage": "Release v${version}",
+    "changelog": "npx auto-changelog --stdout --commit-limit false -u --template ./changelog.hbs"
+  },
+  "github": {
+    "release": true
+  }
+}
