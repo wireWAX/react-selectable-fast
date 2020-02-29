@@ -343,7 +343,7 @@ class SelectableGroup extends Component<TSelectableGroupProps> {
       return
     }
 
-    const selectboxBounds = getBoundsForNode(selectboxNode)
+    const [selectboxBounds] = getBoundsForNode(selectboxNode)
 
     this.selectItems({
       ...selectboxBounds,
@@ -377,7 +377,8 @@ class SelectableGroup extends Component<TSelectableGroupProps> {
       return null
     }
 
-    const isCollided = doObjectsCollide(selectboxBounds, item.bounds!, tolerance, this.props.delta)
+    const { delta } = this.props
+    const isCollided = doObjectsCollide(selectboxBounds, item.bounds!, tolerance, delta)
     const { isSelecting, isSelected } = item.state
 
     if (isFromClick && isCollided) {
@@ -504,7 +505,7 @@ class SelectableGroup extends Component<TSelectableGroupProps> {
     const evt = castTouchToMouseEvent(e)
 
     if (!this.props.globalMouse && !isNodeInRoot(evt.target as any, this.selectableGroup!)) {
-      const offsetData = getBoundsForNode(this.selectableGroup!)
+      const [offsetData] = getBoundsForNode(this.selectableGroup!)
       const collides = doObjectsCollide(
         {
           top: offsetData.top,

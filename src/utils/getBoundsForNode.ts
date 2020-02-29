@@ -34,18 +34,16 @@ export function getDocumentScroll() {
 export function getBoundsForNode(
   node: HTMLElement,
   containerScroll: TGetBoundsForNodeArgs = { scrollTop: 0, scrollLeft: 0 }
-) {
+): TComputedBounds[] {
   const { scrollTop, scrollLeft } = containerScroll
   const { documentScrollTop, documentScrollLeft } = getDocumentScroll()
 
-  const rect = node.getBoundingClientRect()
-
-  return {
+  return Array.from(node.getClientRects()).map(rect => ({
     top: rect.top + documentScrollTop + scrollTop,
     left: rect.left + documentScrollLeft + scrollLeft,
     offsetWidth: node.offsetWidth,
     offsetHeight: node.offsetHeight,
     width: rect.width,
     height: rect.height
-  }
+  }))
 }
