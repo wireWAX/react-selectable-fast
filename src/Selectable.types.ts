@@ -24,7 +24,7 @@ export type TSelectableItem = Component & {
   state: TSelectableItemState
   deselected: boolean
   node: Maybe<HTMLDivElement>
-  bounds: Maybe<TComputedBounds>
+  bounds: Maybe<TComputedBounds[]>
 }
 
 export type TSelectableItemProps = TSelectableItemState & {

@@ -30,18 +30,30 @@ const areBoundsCollide = (
   )
 }
 
+function toArray(value: any) {
+  if (Array.isArray(value)) {
+    return value
+  }
+
+  return [value]
+}
+
 /**
  * Given two objects containing "top", "left", "offsetWidth" and "offsetHeight"
  * properties, determine if they collide.
  */
 export function doObjectsCollide(
-  a: HTMLElement | TComputedBounds,
-  b: HTMLElement | TComputedBounds,
+  a: HTMLElement | TComputedBounds | TComputedBounds[],
+  b: HTMLElement | TComputedBounds | TComputedBounds[],
   tolerance = 0,
   delta = 1
 ) {
-  const aObj = a instanceof HTMLElement ? getBoundsForNode(a) : a
-  const bObj = b instanceof HTMLElement ? getBoundsForNode(b) : b
+  const aBounds = a instanceof HTMLElement ? getBoundsForNode(a) : toArray(a)
+  const bBounds = b instanceof HTMLElement ? getBoundsForNode(b) : toArray(b)
 
-  return areBoundsCollide(aObj, bObj, { tolerance, useOffsetSize: delta === 1 })
+  for (let i = 0; i < aBounds.length; i++) {
+    for (let j = 0; j < bBounds.length; j++) {
+      return areBoundsCollide(aBounds[i], bBounds[j], { tolerance, useOffsetSize: delta === 1 })
+    }
+  }
 }
