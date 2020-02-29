@@ -12,12 +12,14 @@ type TAppProps = {
 type TAppState = {
   disableFirstRow: boolean
   reversed: boolean
+  showSelectableGroup: boolean
 }
 
 class App extends Component<TAppProps, TAppState> {
   state = {
     disableFirstRow: false,
-    reversed: false
+    reversed: false,
+    showSelectableGroup: true
   }
 
   countersRef = createRef<Counters>()
@@ -34,11 +36,22 @@ class App extends Component<TAppProps, TAppState> {
     this.setState(state => ({ reversed: !state.reversed }))
   }
 
+  toggleSelectableGroup = () => {
+    this.setState(state => ({
+      showSelectableGroup: !state.showSelectableGroup
+    }))
+  }
+
   handleSelecting = (selectingItems: TAlbumItem) => {
     this.countersRef.current.handleSelecting(selectingItems)
   }
 
   handleSelectionFinish = selectedItems => {
+    this.countersRef.current.handleSelectionFinish(selectedItems)
+  }
+
+  handleSelectedItemUnmount = (unmountedItem, selectedItems) => {
+    console.log('hadneleSelectedItemUnmount')
     this.countersRef.current.handleSelectionFinish(selectedItems)
   }
 
@@ -48,7 +61,7 @@ class App extends Component<TAppProps, TAppState> {
 
   render() {
     const { items } = this.props
-    const { disableFirstRow, reversed } = this.state
+    const { disableFirstRow, reversed, showSelectableGroup } = this.state
 
     const itemsToRender = disableFirstRow ? items.slice(5) : items
     const orderedItems = reversed ? itemsToRender.slice().reverse() : itemsToRender
@@ -62,21 +75,27 @@ class App extends Component<TAppProps, TAppState> {
         <button className="btn" type="button" onClick={this.toggleOrder}>
           Toggle order
         </button>
-        <SelectableGroup
-          ref={this.getSelectableGroupRef}
-          className="main"
-          clickClassName="tick"
-          enableDeselect={true}
-          tolerance={0}
-          deselectOnEsc={true}
-          allowClickWithoutSelected={false}
-          duringSelection={this.handleSelecting}
-          onSelectionClear={this.handleSelectionClear}
-          onSelectionFinish={this.handleSelectionFinish}
-          ignoreList={['.not-selectable']}
-        >
-          <List items={orderedItems} />
-        </SelectableGroup>
+        <button className="btn" type="button" onClick={this.toggleSelectableGroup}>
+          Toggle group
+        </button>
+        {showSelectableGroup && (
+          <SelectableGroup
+            ref={this.getSelectableGroupRef}
+            className="main"
+            clickClassName="tick"
+            enableDeselect={true}
+            tolerance={0}
+            deselectOnEsc={true}
+            allowClickWithoutSelected={false}
+            duringSelection={this.handleSelecting}
+            onSelectionClear={this.handleSelectionClear}
+            onSelectionFinish={this.handleSelectionFinish}
+            onSelectedItemUnmount={this.handleSelectedItemUnmount}
+            ignoreList={['.not-selectable']}
+          >
+            <List items={orderedItems} />
+          </SelectableGroup>
+        )}
       </div>
     )
   }

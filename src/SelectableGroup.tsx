@@ -44,7 +44,10 @@ export type TSelectableGroupProps = {
   selectboxClassName?: string
   style?: object
   selectionModeClass?: string
+  // Event that will fire when items are selected. Passes an array of keys.
+  onSelectionFinish?: Function
   onSelectionClear?: Function
+  onSelectedItemUnmount?: Function
   enableDeselect?: boolean
   mixedDeselect?: boolean
   deselectOnEsc?: boolean
@@ -56,9 +59,7 @@ export type TSelectableGroupProps = {
   allowMetaClick?: boolean
   allowShiftClick?: boolean
   selectOnClick?: boolean
-  /**
-   * Scroll container selector
-   */
+  // Scroll container selector
   scrollContainer?: string
 
   /**
@@ -67,14 +68,7 @@ export type TSelectableGroupProps = {
    */
   duringSelection?: Function
 
-  /**
-   * Event that will fire when items are selected. Passes an array of keys.
-   */
-  onSelectionFinish?: Function
-
-  /**
-   * The component that will represent the Selectable DOM node
-   */
+  // The component that will represent the Selectable DOM node
   component?: ReactComponentLike
 
   /**
@@ -103,6 +97,7 @@ class SelectableGroup extends Component<TSelectableGroupProps> {
     duringSelection: noop,
     onSelectionFinish: noop,
     onSelectionClear: noop,
+    onSelectedItemUnmount: noop,
     allowClickWithoutSelected: true,
     selectionModeClass: 'in-selection-mode',
     resetOnStart: false,
@@ -189,6 +184,10 @@ class SelectableGroup extends Component<TSelectableGroupProps> {
     }
 
     this.removeTempEventListeners()
+
+    // Prevent onSelectedItemUnmount calls
+    this.selectedItems.clear()
+    this.selectingItems.clear()
   }
 
   removeTempEventListeners() {
@@ -225,15 +224,15 @@ class SelectableGroup extends Component<TSelectableGroupProps> {
   unregisterSelectable = (selectableItem: TSelectableItem) => {
     this.registry.delete(selectableItem)
 
-    const isHandled =
+    const isRemoved =
       this.selectedItems.has(selectableItem) || this.selectingItems.has(selectableItem)
 
     this.selectedItems.delete(selectableItem)
     this.selectingItems.delete(selectableItem)
 
-    if (isHandled) {
+    if (isRemoved) {
       // Notify third-party dev that component did unmount and handled item probably should be deleted
-      this.props.onSelectionFinish!([...this.selectedItems])
+      this.props.onSelectedItemUnmount!(selectableItem, [...this.selectedItems])
     }
   }
 

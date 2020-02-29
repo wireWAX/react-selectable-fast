@@ -48,6 +48,7 @@ class App extends Component {
         duringSelection={this.handleSelecting}
         onSelectionClear={this.handleSelectionClear}
         onSelectionFinish={this.handleSelectionFinish}
+        onSelectedItemUnmount={this.handleSelectedItemUnmount}
         ignoreList={['.not-selectable', '.item:nth-child(10)', '.item:nth-child(27)']}
       >
         <List items={this.props.items} />
@@ -123,6 +124,7 @@ The `<SelectableGroup />` component accepts a few optional props:
 - `duringSelection` (Function) Callback fired rapidly during selection (while the selector is being dragged). Passes an array containing selectable items currently under the selector to the callback function.
 - `onSelectionFinish` (Function) Callback.
 - `onSelectionClear` (Function) Callback.
+- `onSelectedItemUnmount` (Function) Callback.
 - `enableDeselect` (Boolean) Enables deselect with selectbox.
 - `mixedDeselect` (Boolean) When enabled items can be selected and deselected with selectbox at the same time, `enableDeselect` should be set to `true`.
 - `scrollContainer` (String) Selector of scroll container which will be used to calculate selectbox position. If not specified SelectableGroup element will be used as scroll container.
