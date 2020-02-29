@@ -9,7 +9,12 @@ type TAppProps = {
   items: TAlbumItem[]
 }
 
-class App extends Component<TAppProps> {
+type TAppState = {
+  disableFirstRow: boolean
+  reversed: boolean
+}
+
+class App extends Component<TAppProps, TAppState> {
   state = {
     disableFirstRow: false,
     reversed: false
@@ -17,7 +22,19 @@ class App extends Component<TAppProps> {
 
   countersRef = createRef<Counters>()
 
-  handleSelecting = selectingItems => {
+  getSelectableGroupRef = (ref: SelectableGroup | null) => {
+    ;(window as any).selectableGroup = ref
+  }
+
+  toggleFirstRow = () => {
+    this.setState(state => ({ disableFirstRow: !state.disableFirstRow }))
+  }
+
+  toggleOrder = () => {
+    this.setState(state => ({ reversed: !state.reversed }))
+  }
+
+  handleSelecting = (selectingItems: TAlbumItem) => {
     this.countersRef.current.handleSelecting(selectingItems)
   }
 
@@ -27,18 +44,6 @@ class App extends Component<TAppProps> {
 
   handleSelectionClear() {
     console.log('Cancel selection')
-  }
-
-  toggleFirstRow = () => {
-    this.setState({ disableFirstRow: !this.state.disableFirstRow })
-  }
-
-  toggleOrder = () => {
-    this.setState({ reversed: !this.state.reversed })
-  }
-
-  getSelectableGroupRef = (ref: SelectableGroup | null) => {
-    ;(window as any).selectableGroup = ref
   }
 
   render() {
