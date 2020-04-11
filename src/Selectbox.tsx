@@ -19,7 +19,7 @@ const initialState: TSelectboxState = {
   y: 0,
   x: 0,
   width: 0,
-  height: 0
+  height: 0,
 }
 
 export function Selectbox(props: TSelectboxProps) {
@@ -39,12 +39,12 @@ export function Selectbox(props: TSelectboxProps) {
     position: fixedPosition ? 'fixed' : 'absolute',
     cursor: 'default',
     willChange: 'transform',
-    transform: 'translateZ(0)'
+    transform: 'translateZ(0)',
   }
 
   return <div className={className} style={boxStyle} />
 }
 
 Selectbox.defaultProps = {
-  className: 'selectable-selectbox'
+  className: 'selectable-selectbox',
 }

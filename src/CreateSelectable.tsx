@@ -13,12 +13,12 @@ export const createSelectable = <T extends any>(
     static contextType = SelectableGroupContext
 
     static defaultProps = {
-      isSelected: false
+      isSelected: false,
     }
 
     state = {
       isSelected: this.props.isSelected,
-      isSelecting: false
+      isSelecting: false,
     }
 
     node: HTMLElement | null = null

@@ -17,7 +17,7 @@ export const Card = createSelectable<TAlbumProps>((props: TSelectableItemProps &
     'item',
     DISABLED_CARD_YEARS.includes(year) && 'not-selectable',
     isSelecting && 'selecting',
-    isSelected && 'selected'
+    isSelected && 'selected',
   ]
     .filter(Boolean)
     .join(' ')

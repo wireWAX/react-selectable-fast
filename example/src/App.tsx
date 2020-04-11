@@ -19,7 +19,7 @@ class App extends Component<TAppProps, TAppState> {
   state = {
     disableFirstRow: false,
     reversed: false,
-    showSelectableGroup: true
+    showSelectableGroup: true,
   }
 
   countersRef = createRef<Counters>()
@@ -38,7 +38,7 @@ class App extends Component<TAppProps, TAppState> {
 
   toggleSelectableGroup = () => {
     this.setState(state => ({
-      showSelectableGroup: !state.showSelectableGroup
+      showSelectableGroup: !state.showSelectableGroup,
     }))
   }
 

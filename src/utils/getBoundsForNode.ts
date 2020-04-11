@@ -43,6 +43,6 @@ export function getBoundsForNode(
     offsetWidth: node.offsetWidth,
     offsetHeight: node.offsetHeight,
     width: rect.width,
-    height: rect.height
+    height: rect.height,
   }))
 }

@@ -9,6 +9,6 @@ export const SelectableGroupContext = React.createContext<TSelectableGroupContex
     unregister(_: TSelectableItem) {},
     selectAll: noop,
     clearSelection: noop,
-    getScrolledContainer: () => null
-  }
+    getScrolledContainer: () => null,
+  },
 })
