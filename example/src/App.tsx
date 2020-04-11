@@ -2,8 +2,8 @@ import React, { createRef, Component } from 'react'
 
 import { TAlbumItem } from './sample-data'
 import { SelectableGroup } from '../../src'
-import Counters from './Counters'
-import List from './List'
+import { Counters } from './Counters'
+import { List } from './List'
 
 type TAppProps = {
   items: TAlbumItem[]
@@ -47,10 +47,11 @@ class App extends Component<TAppProps, TAppState> {
   }
 
   handleSelectionFinish = selectedItems => {
+    console.log('Handle selection finish', selectedItems.length)
     this.countersRef.current.handleSelectionFinish(selectedItems)
   }
 
-  handleSelectedItemUnmount = (unmountedItem, selectedItems) => {
+  handleSelectedItemUnmount = (_unmountedItem, selectedItems) => {
     console.log('hadneleSelectedItemUnmount')
     this.countersRef.current.handleSelectionFinish(selectedItems)
   }

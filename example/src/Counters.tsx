@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-class Counters extends Component {
+export class Counters extends Component {
   state = {
     selectedItems: [],
     selectingItems: []
@@ -34,5 +34,3 @@ class Counters extends Component {
     )
   }
 }
-
-export default Counters

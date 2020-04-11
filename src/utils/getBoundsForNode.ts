@@ -36,11 +36,10 @@ export function getBoundsForNode(
   containerScroll: TGetBoundsForNodeArgs = { scrollTop: 0, scrollLeft: 0 }
 ): TComputedBounds[] {
   const { scrollTop, scrollLeft } = containerScroll
-  const { documentScrollTop, documentScrollLeft } = getDocumentScroll()
 
   return Array.from(node.getClientRects()).map(rect => ({
-    top: rect.top + documentScrollTop + scrollTop,
-    left: rect.left + documentScrollLeft + scrollLeft,
+    top: rect.top + scrollTop,
+    left: rect.left + scrollLeft,
     offsetWidth: node.offsetWidth,
     offsetHeight: node.offsetHeight,
     width: rect.width,
