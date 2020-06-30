@@ -36,6 +36,7 @@ type TProcessItemOptions = TSelectItemsOptions & {
 export type TSelectableGroupProps = {
   globalMouse?: boolean
   ignoreList?: string[]
+  disableSelectStartList?: string[]
   scrollSpeed?: number
   minimumSpeedFactor?: number
   allowClickWithoutSelected?: boolean
@@ -92,6 +93,7 @@ export class SelectableGroup extends Component<TSelectableGroupProps> {
     tolerance: 0,
     globalMouse: false,
     ignoreList: [],
+    disableSelectStartList: [],
     scrollSpeed: 0.25,
     minimumSpeedFactor: 60,
     duringSelection: noop,
@@ -145,6 +147,12 @@ export class SelectableGroup extends Component<TSelectableGroupProps> {
   ignoreList = this.props.ignoreList!.concat(['.selectable-select-all', '.selectable-deselect-all'])
 
   ignoreListNodes: HTMLElement[] = []
+
+  disableSelectStartCheckCache = new Map<HTMLElement, boolean>()
+
+  disableSelectStartList = this.props.disableSelectStartList!
+
+  disableSelectStartListNodes: HTMLElement[] = []
 
   setSelectboxState: Maybe<TSetSelectboxState> = null
 
@@ -494,6 +502,25 @@ export class SelectableGroup extends Component<TSelectableGroupProps> {
     return shouldBeIgnored
   }
 
+  isInDisableSelectStartList(target: HTMLElement | null) {
+    if (!target) {
+      return
+    }
+
+    if (this.disableSelectStartCheckCache.get(target) !== undefined) {
+      return this.disableSelectStartCheckCache.get(target)
+    }
+
+    const shouldBeIgnored = this.disableSelectStartListNodes.some(
+      disableSelectStartNode =>
+        target === disableSelectStartNode || disableSelectStartNode.contains(target)
+    )
+
+    this.disableSelectStartCheckCache.set(target, shouldBeIgnored)
+
+    return shouldBeIgnored
+  }
+
   removeIgnoredItemsFromRegistry() {
     this.ignoreListNodes = Array.from(document.querySelectorAll(this.ignoreList.join(', ')))
 
@@ -501,6 +528,13 @@ export class SelectableGroup extends Component<TSelectableGroupProps> {
     this.selectedItems = new Set(
       [...this.selectedItems].filter(item => !this.isInIgnoreList(item.node))
     )
+  }
+
+  updateDisableSelectStartListNodes() {
+    this.disableSelectStartListNodes =
+      this.disableSelectStartList.length > 0
+        ? Array.from(document.querySelectorAll(this.disableSelectStartList.join(', ')))
+        : []
   }
 
   mouseDown = (e: Event) => {
@@ -517,8 +551,15 @@ export class SelectableGroup extends Component<TSelectableGroupProps> {
     }
 
     this.removeIgnoredItemsFromRegistry()
+    this.updateDisableSelectStartListNodes()
 
     if (this.isInIgnoreList(e.target as HTMLElement)) {
+      this.mouseDownStarted = false
+
+      return
+    }
+
+    if (this.isInDisableSelectStartList(e.target as HTMLElement)) {
       this.mouseDownStarted = false
 
       return
